@@ -22,7 +22,7 @@ canvas{
     background-image: url("img/g.png");
 
     position: absolute;
-    left: 35%;
+    left: 38%;
     top: 35%;
     height: 260px;
     width: 200px;
@@ -38,8 +38,8 @@ canvas{
     background-image: url("img/bleh.png");
 
     position: absolute;
-    left: 51%;
-    top: 43%;
+    left: 50%;
+    top: 45%;
     height: 250px;
     width: 183px;
     background-position: right top;
