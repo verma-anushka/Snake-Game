@@ -1,0 +1,51 @@
+html, body{
+    margin-top: 0.15%;
+    margin-bottom: 0.1%;
+    background-image: url("img/b1.png");
+    background-position: center center;
+    background-attachment: fixed;
+}
+canvas{
+    z-index: 1;
+    margin: 0 auto;
+    display: block;
+    border: solid green 5px;
+}
+#img{
+    /* background-image: url("img/gameOver.png"); */
+}
+.gameOver{
+    /* top: 50%;
+    bottom: 50%;
+    */    
+    z-index: 2;
+    background-image: url("img/g.png");
+
+    position: absolute;
+    left: 35%;
+    top: 35%;
+    height: 260px;
+    width: 200px;
+    background-position: right top;
+    background-repeat: no-repeat;
+    /* background-attachment: fixed; */
+}
+.gameOver2{
+    /* top: 50%;
+    bottom: 50%;
+    */    
+    z-index: 1;
+    background-image: url("img/bleh.png");
+
+    position: absolute;
+    left: 51%;
+    top: 43%;
+    height: 250px;
+    width: 183px;
+    background-position: right top;
+    background-repeat: no-repeat;
+    /* background-attachment: fixed; */
+}
+.hide{
+    display: none;
+}
