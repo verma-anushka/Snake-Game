@@ -2,6 +2,7 @@ const cvs = document.getElementById("snake");
 const ctx = cvs.getContext("2d");
 const gameOver = document.querySelector(".gameOver");
 const gameOver2 = document.querySelector(".gameOver2");
+const tryAgain = document.querySelector(".tryAgain");
 
 // create the unit
 const box = 32;
@@ -16,7 +17,6 @@ let foodImg = new Image();
 foodImg.src = "img/" + foodImgs[index] + ".png";
 // console.log(foodImgs.length);
 
-// console.log(foodImg);
 // load audio files
 let dead = new Audio();
 let eat = new Audio();
@@ -52,6 +52,42 @@ let score = 0;
 //control the snake
 let d;
 
+
+// cheack collision function
+function collision(head,array){
+    for(let i = 0; i < array.length; i++){
+        if(head.x == array[i].x && head.y == array[i].y){
+            return true;
+        }
+    }
+    return false;
+}
+
+function endGame(){
+    clearInterval(game);
+    cvs.style.opacity = '0.4';
+    gameOver.classList.remove("hide");
+    gameOver2.classList.remove("hide");
+    tryAgain.classList.remove("hide");    
+
+    console.log("game over");
+    dead.play();
+}
+
+tryAgain.addEventListener("click", function again(){
+
+    score = 0;
+    snake = [];
+    snake[0] = {
+        x : 9 * box,
+        y : 10 * box
+    };
+    cvs.style.opacity = '1';
+    ctx.clearRect(0, 0, 608, 608);
+    console.log("in play again");
+    draw();
+});
+
 document.addEventListener("keydown",direction);
 
 function direction(event){
@@ -71,35 +107,18 @@ function direction(event){
     }
 }
 
-// cheack collision function
-function collision(head,array){
-    for(let i = 0; i < array.length; i++){
-        if(head.x == array[i].x && head.y == array[i].y){
-            return true;
-        }
-    }
-    return false;
-}
-
-function endGame(){
-    clearInterval(game);
-    cvs.style.opacity = '0.4';
-    gameOver.classList.remove("hide");
-    gameOver2.classList.remove("hide");
-
-    console.log("game over");
-    dead.play();
-}
-
 // draw everything to the canvas
 function draw(){
     
     gameOver.classList.add("hide");
     gameOver2.classList.add("hide");
+    tryAgain.classList.add("hide");    
 
     ctx.drawImage(ground,0,0);
     
+    console.log("snake length " + snake.length);
     for( let i = 0; i < snake.length ; i++){
+        console.log("cndsjdscn");
         ctx.fillStyle = ( i == 0 )? "green" : "white";
         ctx.fillRect(snake[i].x,snake[i].y,box,box);
         
@@ -112,7 +131,10 @@ function draw(){
     // old head position
     let snakeX = snake[0].x;
     let snakeY = snake[0].y;
-    
+    console.log("x " + snakeX);
+    console.log("y " + snakeY);
+
+    console.log("d " + d);
     // which direction
     if( d == "LEFT") snakeX -= box;
     if( d == "UP") snakeY -= box;
@@ -141,14 +163,18 @@ function draw(){
         x : snakeX,
         y : snakeY
     }
-    
+    console.log("new x " + newHead.x);
+    console.log("new y " + newHead.y);
     // game over
     if(snakeX < box || snakeX > 17 * box || snakeY < 3*box || snakeY > 17*box || collision(newHead,snake)){
-        
         endGame()
     }
     
     snake.unshift(newHead);
+    console.log("snake length@ " + snake.length);
+    
+    // console.log("snake " + snake[0]);
+
     
     ctx.fillStyle = "white";
     ctx.font = "45px Changa one";

@@ -46,6 +46,24 @@ canvas{
     background-repeat: no-repeat;
     /* background-attachment: fixed; */
 }
+.tryAgain{
+    z-index: 1;
+    /* background-image: url("img/playAgain3.png"); */
+
+    position: absolute;
+    left: 54%;
+    top: 65%;
+    background: green;
+    outline: none;
+    border: none;
+    color: white;
+    padding: 10px;
+    text-transform: uppercase;
+    /* height: 75px; */
+    /* width: 75px; */
+    /* background-position: right top; */
+    /* background-repeat: no-repeat; */
+}
 .hide{
     display: none;
 }
