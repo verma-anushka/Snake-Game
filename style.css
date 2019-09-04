@@ -1,7 +1,7 @@
 html, body{
     margin-top: 0.15%;
     margin-bottom: 0.1%;
-    background-image: url("img/b1.png");
+    background-image: url("img/background.png");
     background-position: center center;
     background-attachment: fixed;
 }
@@ -13,7 +13,7 @@ canvas{
 }
 .gameOver{
     z-index: 2;
-    background-image: url("img/g.png");
+    background-image: url("img/gameOverSnake.png");
     position: absolute;
     left: 38%;
     top: 35%;
@@ -24,7 +24,7 @@ canvas{
 }
 .gameOver2{  
     z-index: 1;
-    background-image: url("img/bleh.png");
+    background-image: url("img/gameOver.png");
     position: absolute;
     left: 50%;
     top: 45%;
@@ -41,6 +41,7 @@ canvas{
     background: green;
     outline: none;
     border: none;
+    border-radius: 2%;
     color: white;
     padding: 10px;
     text-transform: uppercase;
