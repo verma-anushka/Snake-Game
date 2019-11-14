@@ -1,6 +1,6 @@
 // Declaring basic variables
-const cvs = document.getElementById("snake");
-const ctx = cvs.getContext("2d");
+const canvas = document.getElementById("snake");
+const ctx = canvas.getContext("2d");
 const gameOver = document.querySelector(".gameOver");
 const gameOver2 = document.querySelector(".gameOver2");
 const tryAgain = document.querySelector(".tryAgain");
@@ -16,21 +16,6 @@ let foodImgs = ['apple', 'banana', 'peach', 'strawberry', 'watermelon'];
 let index = Math.round( (foodImgs.length - 1) * Math.random() );
 let foodImg = new Image();
 foodImg.src = "img/" + foodImgs[index] + ".png";
-
-// Loading audio files
-// let dead = new Audio();
-// let eat = new Audio();
-// let up = new Audio(); 
-// let right = new Audio();
-// let left = new Audio();
-// let down = new Audio();
-
-// dead.src = "audio/dead.mp3";
-// eat.src = "audio/eat.mp3";
-// up.src = "audio/up.mp3";
-// right.src = "audio/right.mp3";
-// left.src = "audio/left.mp3";
-// down.src = "audio/down.mp3";
 
 // Creating the snake
 let snake = [];
@@ -57,12 +42,11 @@ function collision(head,array){
 
 function endGame(){
     clearInterval(game);
-    cvs.style.opacity = '0.4';
+    canvas.style.opacity = '0.4';
     gameOver.classList.remove("hide");
     gameOver2.classList.remove("hide");
     tryAgain.classList.remove("hide");    
     // console.log("game over");
-    // dead.play();
 }
 
 tryAgain.addEventListener("click", function again(){
@@ -74,9 +58,9 @@ tryAgain.addEventListener("click", function again(){
         x : 9 * unit,
         y : 10 * unit
     };
-    cvs.style.opacity = '1';
+    canvas.style.opacity = '1';
     ctx.clearRect(0, 0, 608, 608);
-    console.log("in play again");
+    // console.log("play again");
     draw();
     game = setInterval(draw,100);
     
@@ -85,17 +69,13 @@ tryAgain.addEventListener("click", function again(){
 document.addEventListener("keydown", function direction(event){
     let key = event.keyCode;
     if( key == 37 && d != "RIGHT"){
-        // left.play();
         d = "LEFT";
     }else if(key == 38 && d != "DOWN"){
         d = "UP";
-        // up.play();
     }else if(key == 39 && d != "LEFT"){
         d = "RIGHT";
-        // right.play();
     }else if(key == 40 && d != "UP"){
         d = "DOWN";
-        // down.play();
     }
 });
 
@@ -108,16 +88,15 @@ function draw(){
     ctx.drawImage(ground,0,0);
     
     for( let i = 0; i < snake.length ; i++){
-        ctx.fillStyle = ( i == 0 )? "green" : "white";
+        ctx.fillStyle = ( i == 0 )? "#0a460a" : "#d7ff96";
         ctx.fillRect(snake[i].x,snake[i].y,unit,unit);
         
-        ctx.strokeStyle = "green";
+        ctx.strokeStyle = "#0a460a";
         ctx.strokeRect(snake[i].x,snake[i].y,unit,unit);
     }
     
     ctx.drawImage(foodImg, food.x, food.y);
     
-    // Old head position
     let snakeX = snake[0].x;
     let snakeY = snake[0].y;
 
@@ -131,8 +110,22 @@ function draw(){
         snakeY += unit;
     
     if(snakeX == food.x && snakeY == food.y){
-        score++;
-        // eat.play();
+        console.log(foodImgs[index]);
+
+        switch(foodImgs[index]) {
+        case 'apple':
+            score += 2;
+            break;
+        case 'banana':
+            score += 5;
+            break;
+        case 'peach':
+            score += 10;
+            break;
+        default:
+            score++;
+        }
+        // score++;
         food = {
             x : Math.floor(Math.random()*17+1) * unit,
             y : Math.floor(Math.random()*15+3) * unit
@@ -144,7 +137,6 @@ function draw(){
         snake.pop();
     }
     
-    // New Head   
     let newHead = {
         x : snakeX,
         y : snakeY
